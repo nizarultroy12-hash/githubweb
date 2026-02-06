@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IX CALARUNA - Moana of Nusantara</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    
+
+    
+    <style>
+        /* --- 1. PALET WARNA (MOANA & HUTAN INDONESIA) --- */
+        :root {
+            /* Warna Moana */
+            --ocean-blue: #007599;      /* Laut dalam */
+            --lagoon-teal: #4db6ac;     /* Air dangkal */
+            --coral-red: #ff6f61;       /* Bunga/Motif Baju Moana */
+            --maui-tattoo: #263238;     /* Warna tato/teks gelap */
+            --sand-gold: #f9dba5;       /* Pasir pantai */
+            
+            /* Warna Hutan Tropis Indonesia */
+            --indo-jungle: #1b4d3e;     /* Hijau hutan hujan lebat */
+            --fern-green: #66bb6a;      /* Daun muda */
+            
+            /* Background */
+            --bg-gradient: linear-gradient(180deg, var(--ocean-blue) 0%, var(--indo-jungle) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- DEKORASI OMBAK --- */
+        .wave-divider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 30px;
+            margin-bottom: 50px;
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5rem;
+            color: var(--sand-gold);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #e0f2f1;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- SECTION JUDUL --- */
+        .section-title {
+            text-align: center;
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            margin: 50px 0 30px;
+            color: var(--sand-gold);
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        /* Ikon Bunga Kembang Sepatu (CSS Text) */
+        .section-title::before, .section-title::after {
+            content: '🌺';
+            font-size: 2rem;
+            margin: 0 15px;
+        }
+
+        /* --- STRUKTUR ORGANISASI --- */
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .org-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* KARTU PEJABAT KELAS */
+        .profile-card {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--maui-tattoo);
+            width: 220px;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            border-bottom: 8px solid var(--ocean-blue);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 4px solid var(--coral-red);
+            background-color: #ddd;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .name {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .char-ref {
+            font-size: 0.8rem;
+            font-style: italic;
+            color: #666;
+        }
+        
+
+        /* WARNA KHUSUS JABATAN */
+        /* Wali Kelas (Te Fiti - Hijau) */
+        .card-wali { border-bottom-color: var(--indo-jungle); }
+        .card-wali .role-badge { background: var(--indo-jungle); }
+        
+        /* Ketua (Moana - Oranye/Merah) */
+        .card-ketua { border-bottom-color: var(--coral-red); }
+        .card-ketua .role-badge { background: var(--coral-red); }
+
+        /* Wakil (Maui - Biru Laut) */
+        .card-wakil { border-bottom-color: var(--ocean-blue); }
+        .card-wakil .role-badge { background: var(--ocean-blue); }
+
+        /* Bendahara (Tamatoa - Emas/Ungu) */
+        .card-money { border-bottom-color: #9c27b0; }
+        .card-money .role-badge { background: #9c27b0; }
+
+        /* Sekretaris (Tala/Pari - Biru Langit) */
+        .card-sec { border-bottom-color: var(--lagoon-teal); }
+        .card-sec .role-badge { background: var(--lagoon-teal); }
+
+
+        /* --- DAFTAR SISWA (38 ORANG) --- */
+        .student-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+        }
+
+        .student-item {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--maui-tattoo);
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: 0.2s;
+        }
+
+        .student-item:hover {
+            background: var(--sand-gold);
+            transform: scale(1.05);
+        }
+
+        /* --- GALERI KENANGAN --- */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 10px 10px 30px 10px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+            transform: rotate(-2deg);
+            transition: transform 0.3s;
+        }
+
+        .polaroid:nth-child(even) { transform: rotate(2deg); }
+        .polaroid:hover { transform: rotate(0deg) scale(1.05); z-index: 10; }
+
+        .polaroid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+        }
+
+        .caption {
+            color: var(--maui-tattoo);
+            font-family: 'Pacifico', cursive;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 40px;
+            background: var(--maui-tattoo);
+            color: var(--sand-gold);
+        }
+
+        /* Responsive Check */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .org-row { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>NINE CALARUNA</h1>
+            <div class="subtitle">IX CALARUNA • Moana of Nusantara</div>
+            <p style="margin-top: 15px;">Sejauh mata memandang, kitalah penjaga samudra dan hutan.</p>
+        </header>
+        
+        
+                        
+
+
+        
+ <section id="struktur">
+            <h2 class="section-title">Para Pemimpin Pulau</h2>
+            
+            <div class="org-chart">
+                
+                <div class="profile-card card-wali">
+                    <img src="IMG-20260204-WA0007.jpg" alt="Guru" class="profile-img">
+                    <br>
+                    <span class="role-badge">Wali Kelas</span>
+                    <div class="name">Ma'am Dina Ermawati S.Pd</div>
+                    <div class="char-ref">The Heart of Class</div>
+                </div>
+
+                <div class="org-row">
+                    <div class="profile-card card-ketua">
+                        <img src="NABILA (4).jpg" alt="Ketua" class="profile-img">
+                        <br>
+                        <span class="role-badge">Ketua Kelas</span>
+                        <div class="name">Figo Ben Khalfalah Rahmudi</div>
+                        <div class="char-ref">Sang Penunjuk Jalan</div>
+                    </div>
+
+                    <div class="profile-card card-wakil">
+                        <img src="NABILA (3).jpg" alt="Wakil" class="profile-img">
+                        <br>
+                        <span class="role-badge">Wakil Ketua</span>
+                        <div class="name">Safira Nisa Serina Putri</div>
+                        <div class="char-ref">Sang Penasehat</div>
+                    </div>
+                </div>
+
+                <div class="org-row">
+                    <div class="profile-card card-sec">
+                        <img src="NABILA (2).jpg" class="profile-img">
+                        <span class="role-badge">Sekretaris 1</span>
+                        <div class="name">Riska Wulan Aprilia</div>
+                        <div class="char-ref">Penjaga Catatan</div>
+                    </div>
+                    <div class="profile-card card-sec">
+                        <img src="NABILA (6).jpg" class="profile-img">
+                        <span class="role-badge">Sekretaris 2</span>
+                        <div class="name">Nizarul Troy Alamsyah</div>
+                        <div class="char-ref">Penjaga Kedamaian</div>
+                    </div>
+
+                    <div class="profile-card card-money">
+                        <img src="NABILA (5).jpg" class="profile-img">
+                        <span class="role-badge">Bendahara 1</span>
+                        <div class="name">Aina Zhivilia Azahrah</div>
+                        <div class="char-ref">Shiny Collector</div>
+                    </div>
+                    <div class="profile-card card-money">
+                        <img src="NABILA (1).jpg" class="profile-img">
+                        <span class="role-badge">Bendahara 2</span>
+                        <div class="name">Nabila Hasnia Zulfa</div>
+                        <div class="char-ref">Keeper of Gold</div>
+                    </div>
+                </div>
+
+              </div>
+                 </section>
+
+             <section id="siswa">
+             <h2 class="section-title">The Crew</h2>
+            
+             <div class="student-grid">
+                <div class="student-item">1. Ade Dharma Putra 🥥</div>
+                <div class="student-item">2. Agustin Wulandari 🐢</div>
+                <div class="student-item">3. Aina Zhivilia Azahrah 🌺</div>
+                <div class="student-item">4. Alya Syifa Rodiansyah 🌊</div>
+                <div class="student-item">5. Cheril Salsabila Putri 🦜</div>
+                <div class="student-item">6. Christopher Dewantoro 🌴</div>
+                <div class="student-item">7. Citra Dewi Anggraini 🚣</div>
+                <div class="student-item">8. Daffa Putra Mahardika 🎣</div>
+                <div class="student-item">9. Dhio Safa Ramadhan 🐚</div>
+                <div class="student-item">10. Emirza Afdani Arafat 🌋</div>
+
+                <div class="student-item">11. Evita Regina Putri 🌤️</div>
+                <div class="student-item">12. Figo Ben Khalfalah Rahmudi 🐓</div>
+                <div class="student-item">13. Hawa Thara Abidah 🐷</div>
+                <div class="student-item">14. Hayden Fransisco 🦈</div>
+                <div class="student-item">15. Ibrahim Zulkarnain 🌿</div>
+                <div class="student-item">16. Jenar Mahesa Putra 🪵</div>
+                <div class="student-item">17. Jessica Prahesti Cahyaningrum 🎋</div>
+                <div class="student-item">18. Keysya Syayidatul Mukaromah 🦋</div>
+                <div class="student-item">19. Marchel Dion Haerudiono 🛶</div>
+                <div class="student-item">20. Mey Liana Nafisah 🦀</div>
+
+                <div class="student-item">21. Mohammad Nihal Rafif Felix 🐟</div>
+                <div class="student-item">22. Mohammad Januarta 🐋</div>
+                <div class="student-item">23. Muhammad Aldrin Junatriya 💎</div>
+                <div class="student-item">24. Muhammad Hafizh Al Faridzy 🏞️</div>
+                <div class="student-item">25. Nabila Hasnia Zulfa 🌀</div>
+                <div class="student-item">26. Nando Putra Pradana 💐</div>
+                <div class="student-item">27. Nira Chezalibena Kurnia Putri 🏸</div>
+                <div class="student-item">28. Nizarul Troy Alamsyah🎤</div>
+                <div class="student-item">29. Nuril Sefya Anggraini🌹</div>
+                <div class="student-item">30. Okta Dianita Safitri 🥊</div>
+
+                <div class="student-item">31. Rafael Christian Ardha Rhema 🎹</div>
+                <div class="student-item">32. Reyvano Adinata Utama 📚</div>
+                <div class="student-item">33. Riska Wulan Aprilia 🎭</div>
+                <div class="student-item">34. Safira Nisa Serina Putri 🎬</div>
+                <div class="student-item">35. Sandrina Romadhona 🎸</div>
+                <div class="student-item">36. Tirza Vanialarissa Nuelani 📺</div>
+                <div class="student-item">37. Ula Putri Ayu Wulandari 🐘</div>
+                <div class="student-item">38. Zhafirah Zahroh 🕊️</div>
+             </div>
+              </section>
+
+             <section id="kenangan">
+             <h2 class="section-title">Island Memories</h2>
+             <div class="gallery-container">
+                <div class="polaroid">
+                    <img src="1.jpg" alt="Kenangan 1">
+                    <div class="caption">Upacara SERTJIAB</div>
+                </div>
+                <div class="polaroid">
+                    <img src="2.jpg" alt="Kenangan 2">
+                    <div class="caption">Hari Guru</div>
+                </div>
+                <div class="polaroid">
+                    <img src="3.jpg" alt="Kenangan 3">
+                    <div class="caption">Menjelajah Air</div>
+                </div>
+                <div class="polaroid">
+                    <img src="4.jpg" alt="Kenangan 4">
+                    <div class="caption">Classmeeting !!</div>
+                </div>
+             </div>
+             </section>
+
+
+    
+             <footer>
+        <p>&copy; 2025 CALARUNA.</p>
+        <p style="font-size: 0.8rem; opacity: 0.7;">Made with VSCODE & Semangat Nusantara</p>
+    </footer>
+        <!DOCTYPE html>
+ <html>
+ <head>
+ <style>
+  /* Mengambil font santai dari Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+  .button-santai {
+    /* Menghilangkan dekorasi link default */
+    text-decoration: none;
+    
+    /* Warna dan Font */
+    background-color: #007599; /* Warna orange lembut */
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    
+    /* Layout dan Bentuk */
+    padding: 12px 24px;
+    display: inline-block;
+    border-radius: 50px; /* Membuat sudut sangat bulat/oval */
+    
+    /* Animasi halus */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px #001f28;
+  }
+
+  /* Efek saat kursor di atas tombol */
+  .button-santai:hover {
+    background-color: #014d64;
+    transform: translateY(-2px); /* Tombol sedikit naik */
+    box-shadow: 0 6px 20px #003d50;
+  }
+
+  /* Efek saat tombol diklik */
+  .button-santai:active {
+    transform: translateY(1px);
+   }
+ </style>
+ </head>
+ <body>
+
+  <a href="https://docs.google.com/spreadsheets/d/1Xi0G9kK2P-lyhSObEqoncDp398pM3529YJazds8jGso/edit?usp=drivesdk" class="button-santai">E-PRESENSI</a>
+
+ </body>
+ </html>
+
+       <!DOCTYPE html>
+ <html>
+ <head>
+ <style>
+  /* Mengambil font santai dari Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+  .button-santai {
+    /* Menghilangkan dekorasi link default */
+    text-decoration: none;
+    
+    /* Warna dan Font */
+    background-color: #007599; /* Warna orange lembut */
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    
+    /* Layout dan Bentuk */
+    padding: 12px 24px;
+    display: inline-block;
+    border-radius: 50px; /* Membuat sudut sangat bulat/oval */
+    
+    /* Animasi halus */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px #001f28;
+  }
+
+  /* Efek saat kursor di atas tombol */
+  .button-santai:hover {
+    background-color: #014d64;
+    transform: translateY(-2px); /* Tombol sedikit naik */
+    box-shadow: 0 6px 20px #003d50;
+  }
+
+  /* Efek saat tombol diklik */
+  .button-santai:active {
+    transform: translateY(1px);
+  }
+ </style> 
+ </head>
+ <body>
+
+
+  <a href="https://docs.google.com/spreadsheets/d/1CvEYEiAR5EkD4RvUodrhuzdBAI7qLO9DWDmmPnrwUzo/edit?usp=drivesdk" class="button-santai">E-JURNAL</a>
+
+ </body>
+ </html>
+
+</html>
